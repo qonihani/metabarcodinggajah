@@ -315,7 +315,7 @@ Biostrings::writeXStringSet(seq_out, str_c(path , "gajah_sequences.fasta"),
                             compress = FALSE, width = 20000)
 
 ### Assign Taxonomy
-Now we assign taxonomy to our sequences using the 16S database. You can download the fasta and txt file here.
+Now we assign taxonomy to our sequences using the 16S database. You can download the fasta and txt file ![here](https://ucedna.com/reference-databases-for-metabarcoding).
 
 ```sh
 taxa <- assignTaxonomy(seq_table_nochim, 
