@@ -78,6 +78,7 @@ plotQualityProfile(raw_forward[1:2])
 plotQualityProfile(raw_reverse[1:2])
 ```
 The plot should look like this. 
+
 ![plotf](Figures/plotf.png)
 
 ### Naming and saving the output files
