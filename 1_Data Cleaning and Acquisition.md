@@ -305,7 +305,7 @@ Creating ASV files
 ```
 write_xlsx(seq_table_nochim_trans,"C:/Users/Asus/Documents/R_Projects/Metabarcoding Gajah/data/seqtab_nochim_trans.xlsx")
 ```
-
+```
 df <- seq_table_nochim_trans
 seq_out <- Biostrings::DNAStringSet(df$sequence)
 
@@ -313,6 +313,7 @@ names(seq_out) <- df$ASVNumber
 
 Biostrings::writeXStringSet(seq_out, str_c(path , "gajah_sequences.fasta"), 
                             compress = FALSE, width = 20000)
+```
 
 ### Assign Taxonomy
 Now we assign taxonomy to our sequences using the 16S database. You can download the fasta and txt file [here](https://ucedna.com/reference-databases-for-metabarcoding).
