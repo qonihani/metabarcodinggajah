@@ -78,7 +78,8 @@ plotQualityProfile(raw_forward[1:2])
 plotQualityProfile(raw_reverse[1:2])
 ```
 The plot should look like this. 
-
+Figures/plot quality profile forward.png
+Figures/plot quality profile reverse.png
 
 ### Naming and saving the output files
 Dada2 requires us to define the name of our output files. Also, we need to place filtered files in filtered/ subdirectory.
