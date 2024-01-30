@@ -1,3 +1,4 @@
+## ((IN PROGRESS))
 ### Assign Taxonomy
 Now we assign taxonomy to our sequences using the 16S database. You can download the fasta and txt file [here](https://ucedna.com/reference-databases-for-metabarcoding).
 We're gonna use local BLASTN. 
