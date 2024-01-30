@@ -116,9 +116,9 @@ head(out)
 The console should look like this 
 
 ```sh
-reads.in reads.out
-16_S16_L001_R1_001.fastq.gz   326080    323224
-27_S27_L001_R1_001.fastq.gz    88832     88026
+# reads.in reads.out
+# 16_S16_L001_R1_001.fastq.gz   326080    323224
+# 27_S27_L001_R1_001.fastq.gz    88832     88026
 ```
 ### Learn the Error Rates
 The DADA2 algorithm depends on a parametric error model and every amplicon dataset has a slightly different error rate. The learnErrors of Dada2 learns the error model from the data and will help DADA2 to fits its method to your data
@@ -127,8 +127,8 @@ errors_forward <- learnErrors(filtered_forward, multithread=TRUE)
 errors_reverse <- learnErrors(filtered_reverse, multithread=TRUE)
 ```
 ```
-52641214 total bases in 411250 reads from 2 samples will be used for learning the error rates.
-50429203 total bases in 411250 reads from 2 samples will be used for learning the error rates.
+# 52641214 total bases in 411250 reads from 2 samples will be used for learning the error rates.
+# 50429203 total bases in 411250 reads from 2 samples will be used for learning the error rates.
 ```
 Then we visualise the estimated error rates
 ```
@@ -148,17 +148,15 @@ derep_reverse <- derepFastq(filtered_reverse, verbose=TRUE)
 ```
 The console should look like this. 
 ```sh
-# For forward
-Dereplicating sequence entries in Fastq file: fastq_Clean/filtered/16_R1_trimmed.fastq.gz
-Encountered 52466 unique sequences from 323224 total sequences read.
-Dereplicating sequence entries in Fastq file: fastq_Clean/filtered/27_R1_trimmed.fastq.gz
-Encountered 20658 unique sequences from 88026 total sequences read.
+# Dereplicating sequence entries in Fastq file: fastq_Clean/filtered/16_R1_trimmed.fastq.gz
+# Encountered 52466 unique sequences from 323224 total sequences read.
+# Dereplicating sequence entries in Fastq file: fastq_Clean/filtered/27_R1_trimmed.fastq.gz
+# Encountered 20658 unique sequences from 88026 total sequences read.
 
-# For reverse
-Dereplicating sequence entries in Fastq file: fastq_Clean/filtered/16_R2_trimmed.fastq.gz
-Encountered 48243 unique sequences from 323224 total sequences read.
-Dereplicating sequence entries in Fastq file: fastq_Clean/filtered/27_R2_trimmed.fastq.gz
-Encountered 20297 unique sequences from 88026 total sequences read.
+# Dereplicating sequence entries in Fastq file: fastq_Clean/filtered/16_R2_trimmed.fastq.gz
+# Encountered 48243 unique sequences from 323224 total sequences read.
+# Dereplicating sequence entries in Fastq file: fastq_Clean/filtered/27_R2_trimmed.fastq.gz
+# Encountered 20297 unique sequences from 88026 total sequences read.
 ```
 
 Name the derep-class objects by the sample names.
@@ -174,20 +172,19 @@ dada_forward <- dada(derep_forward, err=errors_forward, multithread=TRUE)
 dada_reverse <- dada(derep_reverse, err=errors_reverse, multithread=TRUE)
 ```
 ```sh
-# For forward
-Sample 1 - 323224 reads in 52466 unique sequences.
-Sample 2 - 88026 reads in 20658 unique sequences.
+# Sample 1 - 323224 reads in 52466 unique sequences.
+# Sample 2 - 88026 reads in 20658 unique sequences.
 
-# For reverse
-Sample 1 - 323224 reads in 48243 unique sequences.
-Sample 2 - 88026 reads in 20297 unique sequences.
+# Sample 1 - 323224 reads in 48243 unique sequences.
+# Sample 2 - 88026 reads in 20297 unique sequences.
 ```
-inspect the dada-class object
+
+Inspect the dada-class object.
 ```
 dada_forward[[1]]
 ```
 ```sh
-dada-class: object describing DADA2 denoising results
+# dada-class: object describing DADA2 denoising results
 # 141 sequence variants were inferred from 52466 input unique sequences.
 # Key parameters: OMEGA_A = 1e-40, OMEGA_C = 1e-40, BAND_SIZE = 16
 ```
@@ -199,8 +196,8 @@ merged_reads <- mergePairs(dada_forward, derep_forward, dada_reverse,
                            derep_reverse, verbose=TRUE)
 ```
 ```sh
-299887 paired-reads (in 337 unique pairings) successfully merged out of 321494 (in 1368 pairings) input.
-70180 paired-reads (in 296 unique pairings) successfully merged out of 87335 (in 1367 pairings) input.
+# 299887 paired-reads (in 337 unique pairings) successfully merged out of 321494 (in 1368 pairings) input.
+# 70180 paired-reads (in 296 unique pairings) successfully merged out of 87335 (in 1367 pairings) input.
 ```
 
 Inspect the merger data.frame from the first sample.
@@ -239,8 +236,8 @@ Inspect distribution of sequence lengths.
 table(nchar(getSequences(seq_table)))
 ```
 ```sh
-128 166 167 168 169 171 172 174 175 
-1   3 343 172  52   4   1  17   7 
+# 128 166 167 168 169 171 172 174 175 
+# 1   3 343 172  52   4   1  17   7 
 ```
 
 ### Remove Chimeras
@@ -355,7 +352,7 @@ write.csv(combined_table, file="Combined_raw_ASVs_table.csv")
 
 
 ### Save RData to be load in the future
-Menyimpan variable dan data untuk bisa dimuat kembali
+You can name it however you want.
 ```
-save.image("R_image")
+save.image("gajah1.RData")
 ```
