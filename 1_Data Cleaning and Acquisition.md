@@ -16,7 +16,7 @@ install.packages("writexl")
 install.packages("stringr")
 install.packages("tibble")
 ```
-Then load the packages and verify you have the correct DADA2 version. It should be ver 3.16 or higher. 
+Then load the packages and verify you have the correct DADA2 version. It should be ver 1.30.0 or higher. 
 
 ```sh
 library(dada2) 
@@ -40,11 +40,11 @@ Extract the fastqs form the zip and put it into a folder named 'fastq'. In the s
 path <- 'fastq'
 list.files(path)
 ```
-after you've run the script, the console should show all of your sample fastqs.
+After you've run the script, the console should show all of your sample fastqs. I'm using other samples below. 
 
 ```sh
-# [1] "16_S16_L001_R1_001.fastq.gz" "16_S16_L001_R2_001.fastq.gz"
-# [3] "27_S27_L001_R1_001.fastq.gz" "27_S27_L001_R2_001.fastq.gz"
+# [1] "16_S16_L001_R1_001.fastq" "16_S16_L001_R2_001.fastq"
+# [3] "27_S27_L001_R1_001.fastq" "27_S27_L001_R2_001.fastq"
 ```
 
 ### Quality check
