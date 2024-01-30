@@ -79,8 +79,8 @@ plotQualityProfile(raw_reverse[1:2])
 ```
 The plot should look like this. The top are for forwards, and the bottom for reverse.
 
-![plotf](Figures/plotf.png)
-![plotr](Figures/plotr.png)
+![plotf](Figures/plotr.png)
+![plotr](Figures/plotf.png)
 
 ### Naming and saving the output files
 Dada2 requires us to define the name of our output files. Also, we need to place filtered files in filtered/ subdirectory.
