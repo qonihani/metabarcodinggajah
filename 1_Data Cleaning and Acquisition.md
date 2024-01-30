@@ -143,7 +143,7 @@ derep_forward <- derepFastq(filtered_forward, verbose=TRUE)
 derep_reverse <- derepFastq(filtered_reverse, verbose=TRUE)
 ```
 The console should look like this. 
-```
+```sh
 # For forward
 Dereplicating sequence entries in Fastq file: fastq_Clean/filtered/16_R1_trimmed.fastq.gz
 Encountered 52466 unique sequences from 323224 total sequences read.
@@ -169,7 +169,7 @@ We are now ready to apply the core sequence-variant inference algorithm to the d
 dada_forward <- dada(derep_forward, err=errors_forward, multithread=TRUE)
 dada_reverse <- dada(derep_reverse, err=errors_reverse, multithread=TRUE)
 ```
-```
+```sh
 # For forward
 Sample 1 - 323224 reads in 52466 unique sequences.
 Sample 2 - 88026 reads in 20658 unique sequences.
@@ -182,7 +182,7 @@ inspect the dada-class object
 ```
 dada_forward[[1]]
 ```
-```
+```sh
 dada-class: object describing DADA2 denoising results
 # 141 sequence variants were inferred from 52466 input unique sequences.
 # Key parameters: OMEGA_A = 1e-40, OMEGA_C = 1e-40, BAND_SIZE = 16
@@ -194,7 +194,7 @@ Now that the reads are trimmed, dereplicated and error-corrected we can merge th
 merged_reads <- mergePairs(dada_forward, derep_forward, dada_reverse,
                            derep_reverse, verbose=TRUE)
 ```
-```
+```sh
 299887 paired-reads (in 337 unique pairings) successfully merged out of 321494 (in 1368 pairings) input.
 70180 paired-reads (in 296 unique pairings) successfully merged out of 87335 (in 1367 pairings) input.
 ```
@@ -202,7 +202,8 @@ merged_reads <- mergePairs(dada_forward, derep_forward, dada_reverse,
 Inspect the merger data.frame from the first sample.
 ```
 head(merged_reads[[1]])
-
+```
+```sh
 # sequence
 # 1  CACCGCGGTTATACGAGAGGCCCAAGTTGATAGACGCCGGCGTAAAGAGTGGTTAGGAAGTTTTTTAAAATAAAGCCGAATGCCCTCAGAACTGTCGTACGTACCCGAAGGCAAGAAGCCCCACTACGAAAGTGGCTTTATACCCCCGACCCCACGAAAGCTGCGAAA
 # 2 CACCGCGGTTATACGAAAGGCTCAAGTTGATTGTACACGGCGTAAAGTGTGGTTAAGGAACTACCTAAACTAAAGCTGAACACTCTCAAAGCTGTCATACGCACCCGAGAAAATGAATCCCAACAACGAAAGTGGCTTTAAATACCCCGACCCCACGAAAGCTGTGGAA
@@ -217,7 +218,7 @@ head(merged_reads[[1]])
 # 4     27586       4       4     84         0      0      2   TRUE
 # 5     25076       5       5     80         0      0      2   TRUE
 # 7      8143       7       6     84         0      0      1   TRUE
-````
+```
 
 ### Construct Sequence Table
 We can now construct a sequence table of our mouse samples, a higher-resolution version of the OTU table produced by traditional methods.
@@ -225,7 +226,7 @@ We can now construct a sequence table of our mouse samples, a higher-resolution 
 seq_table <- makeSequenceTable(merged_reads)
 dim(seq_table)
 ```
-```
+```sh
 # 2 600
 ```
 
@@ -233,7 +234,7 @@ Inspect distribution of sequence lengths.
 ```
 table(nchar(getSequences(seq_table)))
 ```
-```
+```sh
 128 166 167 168 169 171 172 174 175 
 1   3 343 172  52   4   1  17   7 
 ```
@@ -244,13 +245,13 @@ The dada method used earlier removes substitutions and indel errors but chimeras
 seq_table_nochim <- removeBimeraDenovo(seq_table, method='consensus',
                                        multithread=TRUE, verbose=TRUE)
 ```
-```
+```sh
 # Identified 547 bimeras out of 600 input sequences.
 ```
 ```
 dim(seq_table_nochim)
 ```
-```
+```sh
 # 2 53
 ```
 
@@ -258,7 +259,7 @@ Which percentage of our reads did we keep?
 ```
 sum(seq_table_nochim) / sum(seq_table)
 ```
-```
+```sh
 # 0.8275799
 ```
 
@@ -274,7 +275,7 @@ colnames(track) <- c('input', 'filtered', 'denoised', 'merged', 'tabled',
 rownames(track) <- sample_names
 head(track)
 ```
-```
+```sh
 # input filtered denoised merged tabled nonchim
 # 16 326080   323224   322555 299887 299887  257927
 # 27  88832    88026    87772  70180  70180   48333
@@ -312,14 +313,14 @@ names(seq_out) <- df$ASVNumber
 Biostrings::writeXStringSet(seq_out, str_c(path , "gajah_sequences.fasta"), 
                             compress = FALSE, width = 20000)
 
-# Assign Taxonomy
-# Now we assign taxonomy to our sequences using the MiFish database
-# Menetapkan Taksonomi
-# Sekarang kita menetapkan taksonomi ke sekuens kita menggunakan basis data MiFish
+### Assign Taxonomy
+Now we assign taxonomy to our sequences using the 16S database. You can download the fasta and txt file here.
 
+```sh
 taxa <- assignTaxonomy(seq_table_nochim, 
                        "taxa/MiFish_Reference_Database_taxonomy.fasta", 
                        multithread=TRUE, verbose = T)
+```
 # taxa <- addSpecies(taxa, "taxa/MiFish_Reference_Database_taxonomy.fasta")
 
 # for inspecting the classification
