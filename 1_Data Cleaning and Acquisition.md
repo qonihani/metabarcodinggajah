@@ -339,6 +339,7 @@ seq_table_nochim_transpose <- t(seq_table_nochim)
 Combine taxa and read tables
 ```
 combined_table <- cbind(taxa, seq_table_nochim_transpose) 
+```
 
 Write into csv file
 ```
