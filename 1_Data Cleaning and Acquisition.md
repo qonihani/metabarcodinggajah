@@ -77,9 +77,10 @@ Run the script one by one, first run the forward and after it's done do the reve
 plotQualityProfile(raw_forward[1:2])
 plotQualityProfile(raw_reverse[1:2])
 ```
-The plot should look like this. 
+The plot should look like this. The top are for forwards, and the bottom for reverse.
 
 ![plotf](Figures/plotf.png)
+![plotr](Figures/plotr.png)
 
 ### Naming and saving the output files
 Dada2 requires us to define the name of our output files. Also, we need to place filtered files in filtered/ subdirectory.
@@ -129,12 +130,14 @@ errors_reverse <- learnErrors(filtered_reverse, multithread=TRUE)
 52641214 total bases in 411250 reads from 2 samples will be used for learning the error rates.
 50429203 total bases in 411250 reads from 2 samples will be used for learning the error rates.
 ```
-then we visualise the estimated error rates
+Then we visualise the estimated error rates
 ```
 plotErrors(errors_forward, nominalQ=TRUE) +
   theme_minimal()
 ```
-the plot should look like this 
+The plot should look like this.
+
+![err](Figures/ploterrors.png)
 
 ### Dereplication
 Dereplication combines all identical sequencing reads into into “unique sequences” with a corresponding “abundance”: the number of reads with that unique sequence. Dereplication substantially reduces computation time by eliminating redundant comparisons.
