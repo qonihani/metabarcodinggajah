@@ -318,40 +318,39 @@ Now we assign taxonomy to our sequences using the 16S database. You can download
 
 ```sh
 taxa <- assignTaxonomy(seq_table_nochim, 
-                       "taxa/MiFish_Reference_Database_taxonomy.fasta", 
+                       "taxa/16S_.fasta", 
                        multithread=TRUE, verbose = T)
+
+taxa <- addSpecies(taxa, "taxa/16S_.fasta")
 ```
-# taxa <- addSpecies(taxa, "taxa/MiFish_Reference_Database_taxonomy.fasta")
 
-# for inspecting the classification
-# untuk memeriksa hasil klasifikasi
-
-# removing sequence rownames for display only
-# menghapus urutan nama belakang untuk tampilan saja
+For inspecting the classification, removing sequence rownames for display only.
+```sh
 taxa_print <- taxa  
 rownames(taxa_print) <- NULL
 head(taxa_print)
+```
 
-# Formatting data and read tables
-# Melakukan Formatting data taxa dan reads
-
-# transpore reads table
-# transposisi reads tabel
+Formatting data and read tables, transpose reads table
+```
 seq_table_nochim_transpose <- t(seq_table_nochim) 
+```
 
-# combine taxa and read tables
-# mengabungkan tabel taxa dan read
+Combine taxa and read tables
+```
 combined_table <- cbind(taxa, seq_table_nochim_transpose) 
 
-# write into csv file
-# menyimpan ke file csv
+Write into csv file
+```
 write.csv(taxa, file="taxa.csv") 
 write.csv(seq_table_nochim, file="reads.csv") 
 write.csv(seq_table_nochim_transpose, file="reads_t.csv") 
 write.csv(combined_table, file="Combined_raw_ASVs_table.csv") 
+```
 
 
-
-# Save RData to be load in the future
-# Menyimpan variable dan data untuk bisa dimuat kembali
-save.image("INBIO159_eDNA_AkusisiData.RData")
+### Save RData to be load in the future
+Menyimpan variable dan data untuk bisa dimuat kembali
+```
+save.image("R_image")
+```
